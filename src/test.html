@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My NEST JS API</title>
+    <link rel="stylesheet" type="text/css" title="" href="css/style.css">
+    <script src="js/client.js"></script>
+</head>
+
+<body>
+
+    <pre class="precode">
+        <code id="help">
+nest.help();
+        </code>
+    </pre>
+    <p>
+        <button type="button" onclick="execAPI('help', '')">
+            NEST
+        </button>
+    </p>
+    <div id="help-response" class="response"></div>
+    <hr />
+    <pre class="precode">
+        <code id="models">
+models=nest.Models();
+        </code>
+    </pre>
+    <p>
+        <button type="button" onclick="execAPI('models', 'models')">
+            NEST
+        </button>
+    </p>
+    <div id="models-response" class="response"></div>
+    <hr />
+
+    <pre class="precode">
+        <code id="test" class="">
+a=1+2
+        </code>
+    </pre>
+    <p>
+        <button type="button" onclick="execAPI('test', 'a')">
+            NEST
+        </button>
+    </p>
+    <div id="test-response" class="response"></div>
+    <hr />
+
+    <pre class="precode">
+        <code id="testcode">
+# Reset kernel
+nest.ResetKernel()
+
+# Create nodes
+pg = nest.Create("poisson_generator", params={"rate": 6500.})
+neurons = nest.Create("iaf_psc_alpha", 100)
+sd = nest.Create("spike_detector")
+
+# Connect nodes
+nest.Connect(pg, neurons, syn_spec={"weight": 10.})
+nest.Connect(neurons, sd)
+
+# Simulate
+nest.Simulate(1000.0)
+
+# Get events
+n_events = sd.get("n_events")
+        </code>
+    </pre>
+    <p>
+        <button type="button" onclick="execAPI('testcode', 'n_events')">
+            NEST
+        </button>
+    <div id="testcode-response" class="response"></div>
+    <hr />
+
+
+    <pre class="precode">
+        <code id="testcode2">
+n1 = nest.Create("iaf_psc_alpha")
+n2 = nest.Create("iaf_psc_alpha")
+nest.Connect(n1, n2)
+conn = nest.GetConnections(n1)
+nest.SetStatus(conn, {"weight": 2.0})
+state = nest.GetStatus(conn)
+        </code>
+    </pre>
+    <p>
+        <button type="button" onclick="execAPI('testcode2', 'state')">
+            NEST
+        </button>
+    <div id="testcode2-response" class="response"></div>
+    <hr />
+</body>
+
+</html>

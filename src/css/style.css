@@ -1,0 +1,10 @@
+.response {
+    background:lightgrey;
+    overflow: scroll;
+    padding: 1em 4em;
+}
+
+.precode {
+    background:lightgrey; 
+    padding: 1em 4em;
+}
