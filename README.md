@@ -15,6 +15,8 @@ Open another terminal and type:
 
     bash ./src/start.sh <nest-install-directory>
 
+Of course you need the latest NEST installed
+
 Start Firefox (e.g.) with Examples
 ---------------------------
 
