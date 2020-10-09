@@ -1,4 +1,4 @@
-var url='http://localhost:5000/exec';
+var url='<YOUR_NEST_API_DOMAIN/exec';
 
 function execAPI(i, r){
     form_id = i;
@@ -6,17 +6,19 @@ function execAPI(i, r){
     var code = document.getElementById(form_id).innerHTML;
     code = code.replace(/(\r\n|\n|\r)/gm,"\\n");
     code = code.replace(/\"/gm, "'");
-    var postData ='{"source": "' + code + '", "return": "' + form_return + '"}';
-    var Http = new XMLHttpRequest();
-    Http.open("POST", url);
-    Http.setRequestHeader('Content-type', 'application/json');
-    Http.setRequestHeader('Access-Control-Allow-Origin', '*');
-    Http.setRequestHeader('Access-Control-Allow-Headers', 'Origin, Content-Type, X-Auth-Token, content-type');
-    Http.setRequestHeader('Access-Control-Allow-Methods', 'GET');
-    Http.send(postData);
-    Http.onreadystatechange = function(){
-        if(this.readyState==4 && this.status==200){
-            document.getElementById(form_id + "-response").innerHTML = Http.responseText;
+    var postData = '{"source": "' + code + '", "return": "' + form_return + '"}';
+    var xhr = new XMLHttpRequest();
+    xhr.addEventListener("readystatechange", function() {
+        if(this.readyState === 4) {
+            console.log(this.responseText);
+            document.getElementById(form_id + "-response").innerHTML = this.responseText;
         }
-    }
+    });
+    xhr.open("POST", url);
+    xhr.setRequestHeader('Content-type', 'application/json');
+    xhr.setRequestHeader('Access-Control-Allow-Origin', '*');
+    xhr.setRequestHeader('Access-Control-Allow-Headers', 'Origin, Content-Type, X-Auth-Token, content-type');
+    xhr.setRequestHeader('Access-Control-Allow-Methods', 'GET');
+    xhr.send(postData);
 }
+
